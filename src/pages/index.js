@@ -1,150 +1,190 @@
-import * as React from "react"
-
-// styles
-const pageStyles = {
-  color: "#232129",
-  padding: "96px",
-  fontFamily: "-apple-system, Roboto, sans-serif, serif",
-}
-const headingStyles = {
-  marginTop: 0,
-  marginBottom: 64,
-  maxWidth: 320,
-}
-const headingAccentStyles = {
-  color: "#663399",
-}
-const paragraphStyles = {
-  marginBottom: 48,
-}
-const codeStyles = {
-  color: "#8A6534",
-  padding: 4,
-  backgroundColor: "#FFF4DB",
-  fontSize: "1.25rem",
-  borderRadius: 4,
-}
-const listStyles = {
-  marginBottom: 96,
-  paddingLeft: 0,
-}
-const listItemStyles = {
-  fontWeight: "300",
-  fontSize: "24px",
-  maxWidth: "560px",
-}
-
-const linkStyle = {
-  color: "#8954A8",
-  fontWeight: "bold",
-  fontSize: "16px",
-  verticalAlign: "5%",
-}
-
-const docLinkStyle = {
-  ...linkStyle,
-  listStyleType: "none",
-  marginBottom: 24,
-}
-
-const descriptionStyle = {
-  color: "#232129",
-  fontSize: "14px",
-}
-
-const docLink = {
-  text: "Documentation",
-  url: "https://www.gatsbyjs.com/docs/",
-  color: "#8954A8",
-}
-// data
-const links = [
-  {
-    text: "Tutorial",
-    url: "https://www.gatsbyjs.com/docs/tutorial/",
-    description:
-      "A great place to get started if you're new to web development. Designed to guide you through setting up your first Gatsby site.",
-    color: "#E95800",
-  },
-  {
-    text: "How to Guides",
-    url: "https://www.gatsbyjs.com/docs/how-to/",
-    description:
-      "Practical step-by-step guides to help you achieve a specific goal. Most useful when you're trying to get something done.",
-    color: "#1099A8",
-  },
-  {
-    text: "Reference Guides",
-    url: "https://www.gatsbyjs.com/docs/reference/",
-    description:
-      "Nitty-gritty technical descriptions of how Gatsby works. Most useful when you need detailed information about Gatsby's APIs.",
-    color: "#BC027F",
-  },
-  {
-    text: "Conceptual Guides",
-    url: "https://www.gatsbyjs.com/docs/conceptual/",
-    description:
-      "Big-picture explanations of higher-level Gatsby concepts. Most useful for building understanding of a particular topic.",
-    color: "#0D96F2",
-  },
-  {
-    text: "Plugin Library",
-    url: "https://www.gatsbyjs.com/plugins",
-    description:
-      "Add functionality and customize your Gatsby site or app with thousands of plugins built by our amazing developer community.",
-    color: "#000000",
-  },
-]
+// Core
+import * as React from "react";
+import styled from "styled-components";
+import { Icon, Button } from "@vybe/vybecard-design-systems";
+import { useLocation } from "@reach/router";
+import { useEffect, useState } from "react";
+// Instruments
+import LogoImage from "../images/logo.svg";
+import BgDesktop from "../images/share-bg-desktop.svg";
+import BgMobile from "../images/share-bg-mobile.svg";
+// Components
+import ContentWrapper from "../components/base/ContentWrapper";
+// import Input from "../components/base/Input";
 
 // markup
 const IndexPage = () => {
-  return (
-    <main style={pageStyles}>
-      <title>Home Page</title>
-      <h1 style={headingStyles}>
-        Congratulations
-        <br />
-        <span style={headingAccentStyles}>— you just made a Gatsby site! </span>
-        <span role="img" aria-label="Party popper emojis">
-          🎉🎉🎉
-        </span>
-      </h1>
-      <p style={paragraphStyles}>
-        Edit <code style={codeStyles}>src/pages/index.js</code> to see this page
-        update in real-time.{" "}
-        <span role="img" aria-label="Sunglasses smiley emoji">
-          😎
-        </span>
-      </p>
-      <ul style={listStyles}>
-        <li style={docLinkStyle}>
-          <a
-            style={linkStyle}
-            href={`${docLink.url}?utm_source=starter&utm_medium=start-page&utm_campaign=minimal-starter`}
-          >
-            {docLink.text}
-          </a>
-        </li>
-        {links.map(link => (
-          <li style={{ ...listItemStyles, color: link.color }}>
-            <span>
-              <a
-                style={linkStyle}
-                href={`${link.url}?utm_source=starter&utm_medium=start-page&utm_campaign=minimal-starter`}
-              >
-                {link.text}
-              </a>
-              <p style={descriptionStyle}>{link.description}</p>
-            </span>
-          </li>
-        ))}
-      </ul>
-      <img
-        alt="Gatsby G Logo"
-        src="data:image/svg+xml,%3Csvg width='24' height='24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 2a10 10 0 110 20 10 10 0 010-20zm0 2c-3.73 0-6.86 2.55-7.75 6L14 19.75c3.45-.89 6-4.02 6-7.75h-5.25v1.5h3.45a6.37 6.37 0 01-3.89 4.44L6.06 9.69C7 7.31 9.3 5.63 12 5.63c2.13 0 4 1.04 5.18 2.65l1.23-1.06A7.959 7.959 0 0012 4zm-8 8a8 8 0 008 8c.04 0 .09 0-8-8z' fill='%23639'/%3E%3C/svg%3E"
-      />
-    </main>
-  )
-}
+  const { search } = useLocation();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [amount, setAmount] = useState("");
 
-export default IndexPage
+  useEffect(() => {
+    const a = new URLSearchParams(search);
+    setFirstName(a.get("u").split("_")[0]);
+    setLastName(a.get("u").split("_")[1]);
+  }, []);
+
+  const getInitials = () => {
+    return `${firstName[0]}${lastName[0]}`;
+  };
+
+  const getInputSize = () => {
+    if (amount.length > 20) {
+      return amount.length + 2;
+    }
+    if (amount.length > 13) {
+      return amount.length + 1;
+    }
+    return amount.length || 1;
+  };
+
+  return (
+    <main>
+      <ContentWrapper>
+        <Header>
+          <Logo src={LogoImage} alt="logo" />
+          <Secure className="info text-content-grey">
+            Site securisé
+            <Icon
+              name="lock"
+              className=" ml-4 iconRound20 bg-content-grey text-content-white"
+            />
+          </Secure>
+        </Header>
+        <main>
+          <Name>
+            <NameBadge>{getInitials()}</NameBadge>
+          </Name>
+          <h1 className="H1 text-content-dark text-center mb-16">
+            Envoyer de l’argent à<br />
+            {firstName} {lastName}
+          </h1>
+            <p className="mark text-content-dark_light text-center mb-3">
+            Entrez un montant
+          </p>
+            <Label>
+              <Input
+                  size={getInputSize()}
+                  type="text"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+              />
+              <span>€</span>
+            </Label>
+            <Button
+                className="btn-large btn-primary flex justify-center m-auto max-w-xs w-full"
+                icon="arrowRight"
+                iconPosition="right"
+            >
+              Continuer
+            </Button>
+        </main>
+      </ContentWrapper>
+    </main>
+  );
+};
+
+export default IndexPage;
+
+const Header = styled.header`
+  padding-top: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Logo = styled.img`
+  width: 82px;
+`;
+
+const Secure = styled.p`
+  display: flex;
+  align-items: center;
+`;
+
+const Name = styled.div`
+  height: 130px;
+  margin: -10px -15px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(${BgMobile});
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: contain;
+  @media (min-width: 768px) {
+    height: 140px;
+    align-items: flex-start;
+    background-image: url(${BgDesktop});
+    background-position: center 30px;
+  }
+`;
+
+const NameBadge = styled.div`
+  width: 86px;
+  height: 86px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 5px solid #ffffff;
+  border-radius: 50%;
+
+  font-family: "Nunito Black", sans-serif;
+  font-weight: 900;
+  font-size: 36px;
+  line-height: 36px;
+  letter-spacing: -0.6px;
+  color: white;
+
+  background: linear-gradient(179.53deg, #4fcfcf 12.98%, #00adc5 113.4%);
+  box-shadow: 0 3.61905px 6.33333px rgba(31, 174, 185, 0.25);
+`;
+
+const Label = styled.label`
+  width: fit-content;
+
+  padding: 0 45px 0 30px;
+  margin: 0 auto 29px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #e4f4f5;
+
+  font-family: "Nunito Black", sans-serif;
+  font-size: 36px;
+  text-align: right;
+  line-height: 36px;
+
+  letter-spacing: -0.6px;
+  border-radius: 60px;
+  color: #39bec8;
+
+  box-shadow: 0 4px 7px rgba(31, 174, 185, 0.05);
+  background: #ffffff;
+  @media (min-width: 768px) {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+  }
+  span {
+    margin-top: -15px;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 32px;
+    text-align: center;
+    letter-spacing: -0.4px;
+    color: #39bec8;
+  }
+`;
+
+const Input = styled.input`
+  width: auto;
+  margin: 0;
+  outline: 0;
+  border: none;
+  background-color: transparent;
+  text-align: right;
+`;
