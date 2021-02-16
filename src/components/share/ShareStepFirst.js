@@ -47,12 +47,10 @@ const ShareStepFirst = () => {
       icon="arrowRight"
       iconPosition="right"
       onClick={() => dispatch(setStep(2))}
+      disabled={amount < 1}
     >
       Continuer
     </Button>
-    <p className="mb-12 info text-content-dark_light text-center">
-      (Frais de 1€ appliqué)
-    </p>
     <ShareFooter />
   </main>
 )};

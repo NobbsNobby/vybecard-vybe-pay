@@ -6,6 +6,9 @@ import CardsLogo from "../../images/cards-logo.png";
 const ShareFooter = () => {
   return (
     <div className="flex flex-col items-center">
+      <p className="mb-12 info text-content-dark_light text-center">
+        (Frais de 1€ appliqué)
+      </p>
       <img
         className="mb-6 flex-shrink-0 flex-grow-0"
         src={CardsLogo}
