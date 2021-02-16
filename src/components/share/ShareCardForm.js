@@ -3,12 +3,13 @@ import React from "react";
 import styled from "styled-components";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
-import BaseFormInputMask from "../base/BaseFormInputMask";
-import BaseFormInput from "../base/BaseFormInput";
 import { Button } from "@vybe/vybecard-design-systems";
 import { useSelector } from "react-redux";
-import ShareFooter from "./ShareFooter";
 import valid from "card-validator";
+// Components
+import ShareFooter from "./ShareFooter";
+import BaseFormInputMask from "../base/BaseFormInputMask";
+import BaseFormInput from "../base/BaseFormInput";
 
 const validationSchema = Yup.object({
   name: Yup.string().required(),
@@ -66,7 +67,6 @@ const ShareCardForm = () => {
               unmask={true}
               placeholder="0000 0000 0000 0000"
             />
-            <ErrorMessage name="cardNumber" />
           </div>
 
           <div>
