@@ -1,7 +1,6 @@
 import React from "react";
 import InitialsBlock from "./InitialsBlock";
 import { useSelector } from "react-redux";
-import styled from "styled-components";
 // Components
 import ShareCardForm from "./ShareCardForm";
 

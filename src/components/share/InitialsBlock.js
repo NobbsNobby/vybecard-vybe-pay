@@ -2,12 +2,14 @@
 import React from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
+import { Icon } from "@vybe/vybecard-design-systems";
+
 // Instruments
 import BgMobile from "../../images/share-bg-mobile.svg";
 import BgDesktop from "../../images/share-bg-desktop.svg";
 // state
-import { setStep, setName } from "../../store/reducers/shareReducer";
-import { Icon } from "@vybe/vybecard-design-systems";
+import { setStep } from "../../store/reducers/shareReducer";
+
 
 const InitialsBlock = () => {
   //redux
@@ -17,7 +19,6 @@ const InitialsBlock = () => {
 
   return (
     <Name>
-      {/*{step !== 1 && <div onClick={() => dispatch(setStep(1))}>return</div>}*/}
       {step !== 1 && (
         <StyledIcon
           name="arrowLeft"
@@ -85,6 +86,6 @@ const StyledIcon = styled(Icon)`
   box-shadow: 0 4px 7px rgba(31, 174, 185, 0.05);
   cursor: pointer;
   @media (min-width: 768px) {
-    top: 24px;
+    top: 27px;
   }
 `

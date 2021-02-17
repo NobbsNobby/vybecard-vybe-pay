@@ -11,6 +11,7 @@ import ShareStepFirst from "../components/share/ShareStepFirst";
 // state
 import { setStep, setName } from "../store/reducers/shareReducer";
 import ShareStepSecond from "../components/share/ShareStepSecond";
+import ShareStepCongrats from "../components/share/ShareStepCongrats";
 
 const IndexPage = () => {
   // name
@@ -34,7 +35,7 @@ const IndexPage = () => {
         <ShareHeader />
         {step === 1 && <ShareStepFirst />}
         {step === 2 && <ShareStepSecond />}
-        {step === 3 && <div>3</div>}
+        {step === 3 && <ShareStepCongrats/>}
       </ContentWrapper>
     </main>
   );
