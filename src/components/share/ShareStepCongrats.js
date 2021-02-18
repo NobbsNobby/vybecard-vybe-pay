@@ -7,9 +7,6 @@ import { useSelector } from "react-redux";
 import IconImage from "../../images/icn_check.svg";
 import InstaIconImage from "../../images/icon_insta.svg";
 
-const width = window.innerWidth;
-const height = window.innerHeight;
-
 const ShareStepCongrats = () => {
   //redux
   const firstName = useSelector((state) => state.firstName);
@@ -21,25 +18,32 @@ const ShareStepCongrats = () => {
         <Wrapper>
           <div className="flex flex-col justify-center items-center">
             <Icon />
-            <h1 className="Hero text-content-dark mb-2">Félicitations 🎉</h1>
+            <h1 className="Hero text-content-dark mb-2">
+              Félicitations
+              <span role="img" aria-label="congrats">
+                🎉
+              </span>
+            </h1>
             <p className="H2 text-content-dark_light text-center max-w-xs">
               {firstName} a reçu {amount}€ sur son compte Vybe
             </p>
           </div>
           <SocialContainer>
             <div className="flex items-center justify-center mb-2">
-              <InstaIcon/>
+              <InstaIcon />
               <span className="H3 text-content-dark">@vybecard</span>
             </div>
-            <span className="body text-content-dark_light">
-              Construis Vybe avec nous sur Insta ❤️
-            </span>
+            <p className="body text-content-dark_light text-center">
+              Construis Vybe avec nous sur Insta{" "}
+              <span role="img" aria-label="congrats">
+                ❤️
+              </span>
+            </p>
           </SocialContainer>
         </Wrapper>
       </main>
       <Confetti
-        width={width}
-        height={height}
+        style={{ width: "100vw", height: "100vh" }}
         recycle={false}
         numberOfPieces={1000}
         initialVelocityY={10}
@@ -80,13 +84,12 @@ const SocialContainer = styled.div`
   justify-content: center;
   align-items: center;
 
-  border: 1px solid #E4F4F5;
+  border: 1px solid #e4f4f5;
   box-shadow: 0 4px 7px rgba(31, 174, 185, 0.05);
   border-radius: 16px;
-  
+
   background-color: #fff;
   @media (min-width: 768px) {
     display: none;
   }
-  
 `;

@@ -1,20 +1,28 @@
 // Core
-import PropTypes from 'prop-types';
-import React, {useEffect} from "react";
+import PropTypes from "prop-types";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
-const Alert = ({ children, isShow, autoCloseFunction, autoCloseDelay = 3000, bgColor = '#39BEC8' }) => {
+const Alert = ({
+  children,
+  isShow,
+  autoCloseFunction,
+  autoCloseDelay = 3000,
+  bgColor = "#39BEC8",
+}) => {
   useEffect(() => {
-    if(isShow && !!autoCloseFunction) {
+    if (isShow && !!autoCloseFunction) {
       setTimeout(() => {
-        autoCloseFunction()
-      }, autoCloseDelay)
+        autoCloseFunction();
+      }, autoCloseDelay);
     }
-  })
+  });
 
   return (
-      <StyledAlert isShow={isShow} bgColor={bgColor}>{children}</StyledAlert>
-  )
+    <StyledAlert isShow={isShow} bgColor={bgColor}>
+      {children}
+    </StyledAlert>
+  );
 };
 
 export default Alert;
@@ -34,7 +42,7 @@ const StyledAlert = styled.div`
   line-height: 26px;
   letter-spacing: -0.1px;
   color: white;
-  background-color: ${({bgColor}) => bgColor};
+  background-color: ${({ bgColor }) => bgColor};
   transform: ${({ isShow }) => (isShow ? "translateY(0)" : "translateY(100%)")};
   transition: all 0.24s ease-in-out;
   & > * {
@@ -52,5 +60,5 @@ Alert.propTypes = {
   autoCloseDelay: PropTypes.number,
   children: PropTypes.any,
   isShow: PropTypes.any.isRequired,
-  bgColor: PropTypes.string
-}
+  bgColor: PropTypes.string,
+};

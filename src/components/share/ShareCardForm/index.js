@@ -34,7 +34,7 @@ const ShareCardForm = () => {
           dispatch(setStep(2));
         }}
       >
-        {({ errors }) => (
+        {({touched, errors, setErrors, values }) => (
           <StyledForm>
             <div className="col-span-2">
               <label className="H4 text-content-dark_light" htmlFor="name">
@@ -45,6 +45,9 @@ const ShareCardForm = () => {
                 name="name"
                 id="name"
                 autoComplete="cc-name"
+                warning={
+                  touched.name && !values.name && errors.name
+                }
               />
             </div>
 
@@ -62,6 +65,9 @@ const ShareCardForm = () => {
                 mask="0000 0000 0000 0000"
                 unmask={true}
                 placeholder="0000 0000 0000 0000"
+                warning={
+                  touched.cardNumber && !values.cardNumber && errors.cardNumber
+                }
               />
             </div>
 
@@ -80,6 +86,9 @@ const ShareCardForm = () => {
                 autoComplete="cc-exp"
                 mask="00/00"
                 placeholder="MM/YY"
+                warning={
+                  touched.expireDate && !values.expireDate && errors.expireDate
+                }
               />
             </div>
 
@@ -93,6 +102,9 @@ const ShareCardForm = () => {
                 name="cvc"
                 id="cvc"
                 autoComplete="cc-csc"
+                warning={
+                  touched.cvc && !values.cvc && errors.cvc
+                }
               />
             </div>
             <Button
@@ -103,7 +115,24 @@ const ShareCardForm = () => {
             </Button>
             {console.log(errors)}
             <Alert
-                isShow={Object.keys(errors).length > 0}
+                isShow={
+                  Object.values(errors).filter((i) => i === 'required').length >
+                  0 &&
+                  Object.values(errors).filter((i) => i !== 'required').length ===
+                  0
+                }
+                autoCloseFunction={() => setErrors({})}
+                bgColor="#D50A6B"
+                >
+              <span>Veuillez remplir le(s) champ(s) manquant(s)</span>
+            </Alert>
+            <Alert
+                isShow={
+                  Object.values(errors).filter((i) => i === 'required').length === 0 &&
+                      !!errors.cardNumber
+                }
+                autoCloseFunction={() => setErrors({})}
+                bgColor="#D50A6B"
             >
               <span>Les numéros de la carte ne sont pas corrects</span>
             </Alert>

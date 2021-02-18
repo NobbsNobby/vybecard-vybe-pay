@@ -9,9 +9,11 @@ import ContentWrapper from "../components/base/ContentWrapper";
 import ShareHeader from "../components/share/ShareHeader";
 import ShareStepFirst from "../components/share/ShareStepFirst";
 // state
-import { setStep, setName } from "../store/reducers/shareReducer";
+import { setName } from "../store/reducers/shareReducer";
 import ShareStepSecond from "../components/share/ShareStepSecond";
 import ShareStepCongrats from "../components/share/ShareStepCongrats";
+import {Helmet} from "react-helmet";
+import Frames from "../components/checkout/Frames";
 
 const IndexPage = () => {
   // name
@@ -25,13 +27,29 @@ const IndexPage = () => {
     if (a.get("u")) {
       dispatch(setName(a.get("u")));
     }
-  }, [search]);
+  }, [search, dispatch]);
 
   // steps
 
   return (
     <main>
       <ContentWrapper>
+        {/*<form id="payment-form" method="POST" action="https://merchant.com/charge-card">*/}
+        {/*  <div className="one-liner">*/}
+        {/*    <div className="card-frame">*/}
+        {/*    </div>*/}
+        {/*    <p className="success-payment-message"></p>*/}
+
+        {/*    <button id="pay-button" onClick={(e) => {*/}
+        {/*      e.preventDefault();*/}
+        {/*      console.log('click')*/}
+        {/*      window.Frames.submitCard()*/}
+        {/*    }}>*/}
+        {/*      PAY GBP 24.99*/}
+        {/*    </button>*/}
+        {/*  </div>*/}
+        {/*  <p className="success-payment-message"></p>*/}
+        {/*</form>*/}
         <ShareHeader />
         {step === 1 && <ShareStepFirst />}
         {step === 2 && <ShareStepSecond />}
